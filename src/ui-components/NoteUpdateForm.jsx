@@ -26,43 +26,22 @@ export default function NoteUpdateForm(props) {
   } = props;
   const initialValues = {
     name: "",
-    item: "",
     description: "",
-    sizel: "",
-    sizew: "",
-    sizeh: "",
-    count: "",
-    weight: "",
-    location: "",
-    zipcode: "",
+    image: "",
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [item, setItem] = React.useState(initialValues.item);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
-  const [sizel, setSizel] = React.useState(initialValues.sizel);
-  const [sizew, setSizew] = React.useState(initialValues.sizew);
-  const [sizeh, setSizeh] = React.useState(initialValues.sizeh);
-  const [count, setCount] = React.useState(initialValues.count);
-  const [weight, setWeight] = React.useState(initialValues.weight);
-  const [location, setLocation] = React.useState(initialValues.location);
-  const [zipcode, setZipcode] = React.useState(initialValues.zipcode);
+  const [image, setImage] = React.useState(initialValues.image);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = noteRecord
       ? { ...initialValues, ...noteRecord }
       : initialValues;
     setName(cleanValues.name);
-    setItem(cleanValues.item);
     setDescription(cleanValues.description);
-    setSizel(cleanValues.sizel);
-    setSizew(cleanValues.sizew);
-    setSizeh(cleanValues.sizeh);
-    setCount(cleanValues.count);
-    setWeight(cleanValues.weight);
-    setLocation(cleanValues.location);
-    setZipcode(cleanValues.zipcode);
+    setImage(cleanValues.image);
     setErrors({});
   };
   const [noteRecord, setNoteRecord] = React.useState(noteModelProp);
@@ -83,15 +62,8 @@ export default function NoteUpdateForm(props) {
   React.useEffect(resetStateValues, [noteRecord]);
   const validations = {
     name: [{ type: "Required" }],
-    item: [{ type: "Required" }],
-    description: [{ type: "Required" }],
-    sizel: [{ type: "Required" }],
-    sizew: [{ type: "Required" }],
-    sizeh: [{ type: "Required" }],
-    count: [{ type: "Required" }],
-    weight: [{ type: "Required" }],
-    location: [{ type: "Required" }],
-    zipcode: [{ type: "Required" }],
+    description: [],
+    image: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -120,15 +92,8 @@ export default function NoteUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           name,
-          item,
-          description,
-          sizel,
-          sizew,
-          sizeh,
-          count,
-          weight,
-          location,
-          zipcode,
+          description: description ?? null,
+          image: image ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -190,15 +155,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name: value,
-              item,
               description,
-              sizel,
-              sizew,
-              sizeh,
-              count,
-              weight,
-              location,
-              zipcode,
+              image,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -214,41 +172,8 @@ export default function NoteUpdateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Item"
-        isRequired={true}
-        isReadOnly={false}
-        value={item}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              item: value,
-              description,
-              sizel,
-              sizew,
-              sizeh,
-              count,
-              weight,
-              location,
-              zipcode,
-            };
-            const result = onChange(modelFields);
-            value = result?.item ?? value;
-          }
-          if (errors.item?.hasError) {
-            runValidationTasks("item", value);
-          }
-          setItem(value);
-        }}
-        onBlur={() => runValidationTasks("item", item)}
-        errorMessage={errors.item?.errorMessage}
-        hasError={errors.item?.hasError}
-        {...getOverrideProps(overrides, "item")}
-      ></TextField>
-      <TextField
         label="Description"
-        isRequired={true}
+        isRequired={false}
         isReadOnly={false}
         value={description}
         onChange={(e) => {
@@ -256,15 +181,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              item,
               description: value,
-              sizel,
-              sizew,
-              sizeh,
-              count,
-              weight,
-              location,
-              zipcode,
+              image,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -280,255 +198,30 @@ export default function NoteUpdateForm(props) {
         {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextField
-        label="Sizel"
-        isRequired={true}
+        label="Image"
+        isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
-        value={sizel}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              item,
-              description,
-              sizel: value,
-              sizew,
-              sizeh,
-              count,
-              weight,
-              location,
-              zipcode,
-            };
-            const result = onChange(modelFields);
-            value = result?.sizel ?? value;
-          }
-          if (errors.sizel?.hasError) {
-            runValidationTasks("sizel", value);
-          }
-          setSizel(value);
-        }}
-        onBlur={() => runValidationTasks("sizel", sizel)}
-        errorMessage={errors.sizel?.errorMessage}
-        hasError={errors.sizel?.hasError}
-        {...getOverrideProps(overrides, "sizel")}
-      ></TextField>
-      <TextField
-        label="Sizew"
-        isRequired={true}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={sizew}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              item,
-              description,
-              sizel,
-              sizew: value,
-              sizeh,
-              count,
-              weight,
-              location,
-              zipcode,
-            };
-            const result = onChange(modelFields);
-            value = result?.sizew ?? value;
-          }
-          if (errors.sizew?.hasError) {
-            runValidationTasks("sizew", value);
-          }
-          setSizew(value);
-        }}
-        onBlur={() => runValidationTasks("sizew", sizew)}
-        errorMessage={errors.sizew?.errorMessage}
-        hasError={errors.sizew?.hasError}
-        {...getOverrideProps(overrides, "sizew")}
-      ></TextField>
-      <TextField
-        label="Sizeh"
-        isRequired={true}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={sizeh}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              item,
-              description,
-              sizel,
-              sizew,
-              sizeh: value,
-              count,
-              weight,
-              location,
-              zipcode,
-            };
-            const result = onChange(modelFields);
-            value = result?.sizeh ?? value;
-          }
-          if (errors.sizeh?.hasError) {
-            runValidationTasks("sizeh", value);
-          }
-          setSizeh(value);
-        }}
-        onBlur={() => runValidationTasks("sizeh", sizeh)}
-        errorMessage={errors.sizeh?.errorMessage}
-        hasError={errors.sizeh?.hasError}
-        {...getOverrideProps(overrides, "sizeh")}
-      ></TextField>
-      <TextField
-        label="Count"
-        isRequired={true}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={count}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              item,
-              description,
-              sizel,
-              sizew,
-              sizeh,
-              count: value,
-              weight,
-              location,
-              zipcode,
-            };
-            const result = onChange(modelFields);
-            value = result?.count ?? value;
-          }
-          if (errors.count?.hasError) {
-            runValidationTasks("count", value);
-          }
-          setCount(value);
-        }}
-        onBlur={() => runValidationTasks("count", count)}
-        errorMessage={errors.count?.errorMessage}
-        hasError={errors.count?.hasError}
-        {...getOverrideProps(overrides, "count")}
-      ></TextField>
-      <TextField
-        label="Weight"
-        isRequired={true}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={weight}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              item,
-              description,
-              sizel,
-              sizew,
-              sizeh,
-              count,
-              weight: value,
-              location,
-              zipcode,
-            };
-            const result = onChange(modelFields);
-            value = result?.weight ?? value;
-          }
-          if (errors.weight?.hasError) {
-            runValidationTasks("weight", value);
-          }
-          setWeight(value);
-        }}
-        onBlur={() => runValidationTasks("weight", weight)}
-        errorMessage={errors.weight?.errorMessage}
-        hasError={errors.weight?.hasError}
-        {...getOverrideProps(overrides, "weight")}
-      ></TextField>
-      <TextField
-        label="Location"
-        isRequired={true}
-        isReadOnly={false}
-        value={location}
+        value={image}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
-              item,
               description,
-              sizel,
-              sizew,
-              sizeh,
-              count,
-              weight,
-              location: value,
-              zipcode,
+              image: value,
             };
             const result = onChange(modelFields);
-            value = result?.location ?? value;
+            value = result?.image ?? value;
           }
-          if (errors.location?.hasError) {
-            runValidationTasks("location", value);
+          if (errors.image?.hasError) {
+            runValidationTasks("image", value);
           }
-          setLocation(value);
+          setImage(value);
         }}
-        onBlur={() => runValidationTasks("location", location)}
-        errorMessage={errors.location?.errorMessage}
-        hasError={errors.location?.hasError}
-        {...getOverrideProps(overrides, "location")}
-      ></TextField>
-      <TextField
-        label="Zipcode"
-        isRequired={true}
-        isReadOnly={false}
-        value={zipcode}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              item,
-              description,
-              sizel,
-              sizew,
-              sizeh,
-              count,
-              weight,
-              location,
-              zipcode: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.zipcode ?? value;
-          }
-          if (errors.zipcode?.hasError) {
-            runValidationTasks("zipcode", value);
-          }
-          setZipcode(value);
-        }}
-        onBlur={() => runValidationTasks("zipcode", zipcode)}
-        errorMessage={errors.zipcode?.errorMessage}
-        hasError={errors.zipcode?.hasError}
-        {...getOverrideProps(overrides, "zipcode")}
+        onBlur={() => runValidationTasks("image", image)}
+        errorMessage={errors.image?.errorMessage}
+        hasError={errors.image?.hasError}
+        {...getOverrideProps(overrides, "image")}
       ></TextField>
       <Flex
         justifyContent="space-between"

@@ -14,41 +14,20 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NoteCreateFormInputValues = {
     name?: string;
-    item?: string;
     description?: string;
-    sizel?: number;
-    sizew?: number;
-    sizeh?: number;
-    count?: number;
-    weight?: number;
-    location?: string;
-    zipcode?: string;
+    image?: string;
 };
 export declare type NoteCreateFormValidationValues = {
     name?: ValidationFunction<string>;
-    item?: ValidationFunction<string>;
     description?: ValidationFunction<string>;
-    sizel?: ValidationFunction<number>;
-    sizew?: ValidationFunction<number>;
-    sizeh?: ValidationFunction<number>;
-    count?: ValidationFunction<number>;
-    weight?: ValidationFunction<number>;
-    location?: ValidationFunction<string>;
-    zipcode?: ValidationFunction<string>;
+    image?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NoteCreateFormOverridesProps = {
     NoteCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    item?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
-    sizel?: PrimitiveOverrideProps<TextFieldProps>;
-    sizew?: PrimitiveOverrideProps<TextFieldProps>;
-    sizeh?: PrimitiveOverrideProps<TextFieldProps>;
-    count?: PrimitiveOverrideProps<TextFieldProps>;
-    weight?: PrimitiveOverrideProps<TextFieldProps>;
-    location?: PrimitiveOverrideProps<TextFieldProps>;
-    zipcode?: PrimitiveOverrideProps<TextFieldProps>;
+    image?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteCreateFormProps = React.PropsWithChildren<{
     overrides?: NoteCreateFormOverridesProps | undefined | null;

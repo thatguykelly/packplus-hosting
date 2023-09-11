@@ -17,6 +17,9 @@
       },
       "api": {
         "packplushosting": {}
+      },
+      "storage": {
+        "imagestorage": {}
       }
     }
   }
