@@ -46,7 +46,15 @@ const App = ({ signOut }) => {
     const image = form.get("image");
     const data = {
       name: form.get("name"),
+      item: form.get("item"),
       description: form.get("description"),
+      sizel: form.get("sizel"),
+      sizew: form.get("sizew"),
+      sizeh: form.get("sizeh"),
+      count: form.get("count"),
+      weight: form.get("weight"),
+      location: form.get("location"),
+      zipcode: form.get("zipcode"),
       image: image.name,
     };
     if (!!data.image) await Storage.put(data.name, image);
