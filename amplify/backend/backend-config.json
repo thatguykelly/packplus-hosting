@@ -1,4 +1,24 @@
 {
+  "api": {
+    "packplushosting": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2024-09-10T16:38:59.313Z",
+              "apiKeyExpirationDays": 365,
+              "description": "kwdefault"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
   "auth": {
     "packplushostingfbea4908": {
       "customAuth": false,
