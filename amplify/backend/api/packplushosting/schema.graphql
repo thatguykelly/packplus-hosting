@@ -10,7 +10,7 @@ type Note @model @auth(rules: [{ allow: public }]) {
   sizel: Float!
   sizew: Float!
   sizeh: Float!
-  count: Number!
+  count: Int!
   weight: Float!
   location: String!
   zipcode: String!
